@@ -1,3 +1,6 @@
-# firejail
-# wps Office Clean CH
+# WPS Kingsoft Office firejailed mod.
+
+
+wps Office clean client 
+
 rm -r 模板
