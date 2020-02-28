@@ -30,9 +30,12 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/fire
 echo "wps" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wpspdf" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wpp" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
-# initialize firejail
+# firejail initialisation desktop Integration
 firecfg
-# firecfg --fix
+# ln -s /usr/bin/wps /usr/local/bin/wps
+# ln -s /usr/bin/wps /usr/local/bin/wpp
+# ln -s /usr/bin/wps /usr/local/bin/wpspdf
+# delete unnecessay files
 rm de_DE.7z 
 rm wps-office_11.1.0.9080.XA_amd64.deb
 rm -r $HOME/.kingsoft
