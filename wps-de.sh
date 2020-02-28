@@ -19,7 +19,7 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/shar
 chmod 644 /usr/share/fonts/wps-fonts/*
 fc-cache -vfs
 # EULA Accepted true
-md ~/.config/Kingsoft
+mkdir -p ~/.config/Kingsoft
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P $HOME/$USER/.config/Kingsoft/
 # install firejail
 apt-get install -y firejail firejail-profiles
