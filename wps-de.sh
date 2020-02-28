@@ -6,7 +6,7 @@ apt-get install -y wps-office_11.1.0.9080.XA_amd64.deb
 apt --fix-broken install
 # install german language
 apt-get install -y p7zip-full
-wget https://github.com/timxx/wps-office-mui/raw/master/mui/de_DE.7z
+wget https://github.com/andreaspreuss/firejail/raw/master/opt/kingsoft/wps-office/office6/mui/de_DE.7z
 7za x de_DE.7z -o/opt/kingsoft/wps-office/office6/mui
 # install ms fonts
 # mkdir /usr/share/fonts/wps-fonts
