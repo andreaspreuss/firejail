@@ -30,6 +30,7 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/fire
 echo "wps" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wpspdf" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wpp" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
+# echo "$USER" >> /etc/firejail/firejail.users
 # firejail initialisation desktop Integration
 firecfg
 # ln -s /usr/bin/wps /usr/local/bin/wps
