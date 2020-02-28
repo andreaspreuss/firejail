@@ -37,6 +37,7 @@ firecfg
 # ln -s /usr/bin/wps /usr/local/bin/wpp
 # ln -s /usr/bin/wps /usr/local/bin/wpspdf
 # delete unnecessay files
+rm -r /home/$USER/模板
 rm de_DE.7z 
 rm wps-office_11.1.0.9080.XA_amd64.deb
 rm -r $HOME/.kingsoft
