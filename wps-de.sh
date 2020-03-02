@@ -10,7 +10,7 @@ apt-get install -f
 # install german language
 apt-get install -y p7zip-full
 wget https://github.com/andreaspreuss/firejail/raw/master/opt/kingsoft/wps-office/office6/mui/de_DE.7z
-7za x de_DE.7z -aoa -o/opt/kingsoft/wps-office/office6/mui
+7za x de_DE.7z -o/opt/kingsoft/wps-office/office6/mui
 # install ms fonts
 # mkdir /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WEBDINGS.TTF -P /usr/share/fonts/wps-fonts
