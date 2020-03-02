@@ -26,8 +26,8 @@ mkdir -p /home/$USER/.cache/Kingsoft
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/$USER/.config/Kingsoft/
 chmod 644 /home/$USER/.config/Kingsoft/*
 # delete unnecassary directories
-rmdir -rfv /home/$USER/.kingsoft
-rmdir -rfv /home/$USER/模板
+rm -rfv /home/$USER/.kingsoft
+rm -rfv /home/$USER/模板
 # install firejail
 apt-get install -y firejail firejail-profiles firetools
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wps.profile -P /etc/firejail/
