@@ -43,8 +43,8 @@ firecfg
 # ln -s /usr/bin/wpp /usr/local/bin/wpp
 # ln -s /usr/bin/wpspdf /usr/local/bin/wpspdf
 # delete unnecessay files
-rm -f de_DE.7z 
-rm -f wps-office_11.1.0.9080.XA_amd64.deb
+rm de_DE.7z 
+rm wps-office_11.1.0.9080.XA_amd64.deb
 apt-get remove -y p7zip-full 
 apt-get autoclean
 apt-get autoremove
