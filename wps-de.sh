@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 # Skript zur automatischen Installation von WPS Office mit eigenen Firejail Profilen
 # Install Kingsoft WPS-Office with firejail - chmod a+x wps-de.sh - ./wps-de.sh
 # 
@@ -44,4 +44,4 @@ rm -r /home/$USER/.kingsoft
 rm -r /home/$USER/模板
 apt-get remove -y p7zip-full 
 apt-get autoclean
-apt autoremove
+apt-get autoremove
