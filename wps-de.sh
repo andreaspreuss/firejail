@@ -46,5 +46,5 @@ firecfg
 rm -f de_DE.7z 
 rm -f wps-office_11.1.0.9080.XA_amd64.deb
 apt-get remove -y p7zip-full 
-apt-get clean -y
-apt-get autoremove -y
+apt-get clean
+apt-get autoremove
