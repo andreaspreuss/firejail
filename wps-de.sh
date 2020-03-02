@@ -1,7 +1,7 @@
 #!/bin/bash -x
 # Skript zur automatischen Installation von WPS Office mit eigenen Firejail Profilen
 # Install Kingsoft WPS-Office with firejail - chmod a+x wps-de.sh - ./wps-de.sh
-# wget -O raw.githubusercontent.com/andreaspreuss/firejail/master/wps-de.sh | sudo bash 
+# wget -O - https://raw.githubusercontent.com/andreaspreuss/firejail/master/wps-de.sh | sudo bash 
 #
 # Download Kingsoft WPS Office
 wget -c http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/9080/wps-office_11.1.0.9080.XA_amd64.deb
