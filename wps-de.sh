@@ -44,3 +44,4 @@ rm -r /home/$USER/.kingsoft
 rm -r /home/$USER/模板
 apt-get remove -y p7zip-full 
 apt-get autoclean
+apt autoremove
