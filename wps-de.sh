@@ -1,7 +1,7 @@
 #!/bin/bash -x
 # Skript zur automatischen Installation von WPS Office mit eigenen Firejail Profilen
 # Install Kingsoft WPS-Office with firejail - chmod a+x wps-de.sh - ./wps-de.sh
-# 
+# Download Kingsoft WPS Office
 wget -c http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/9080/wps-office_11.1.0.9080.XA_amd64.deb
 dpkg -i wps-office_11.1.0.9080.XA_amd64.deb
 apt-get install -f
@@ -23,6 +23,9 @@ fc-cache -vfs
 mkdir -p /home/$USER/.cache/Kingsoft
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/$USER/.config/Kingsoft/
 chmod 644 /home/$USER/.config/Kingsoft/*
+# delete unnecassary directories
+rm -r /home/$USER/.kingsoft
+rm -r /home/$USER/模板
 # install firejail
 apt-get install -y firejail firejail-profiles firetools
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wps.profile -P /etc/firejail/
@@ -35,13 +38,11 @@ echo "wpp" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 # firejail initialisation desktop Integration
 firecfg
 # ln -s /usr/bin/wps /usr/local/bin/wps
-# ln -s /usr/bin/wps /usr/local/bin/wpp
-# ln -s /usr/bin/wps /usr/local/bin/wpspdf
+# ln -s /usr/bin/wpp /usr/local/bin/wpp
+# ln -s /usr/bin/wpspdf /usr/local/bin/wpspdf
 # delete unnecessay files
 rm de_DE.7z 
 rm wps-office_11.1.0.9080.XA_amd64.deb
-rm -r /home/$USER/.kingsoft
-rm -r /home/$USER/模板
 apt-get remove -y p7zip-full 
 apt-get autoclean
 apt-get autoremove
