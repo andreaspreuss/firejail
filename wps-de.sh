@@ -35,6 +35,8 @@ apt-get install -y firejail firejail-profiles firetools
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wps.profile -P /etc/firejail/
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wpspdf.profile -P /etc/firejail/
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wpp.profile -P /etc/firejail/
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/et.profile -P /etc/firejail/
+echo "et" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wps" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wpspdf" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wpp" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
