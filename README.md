@@ -1,7 +1,7 @@
 ## WPS Kingsoft office firejailed modification.
 
 
-wps Office clean client 
+wps Office clean client in german
 
 firejail --debug --x11 wps
 
