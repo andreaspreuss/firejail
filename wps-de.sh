@@ -22,7 +22,7 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/shar
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/wingding.ttf -P /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/mtextra.ttf -P /usr/share/fonts/wps-fonts
 chmod 644 /usr/share/fonts/wps-fonts/*
-fc-cache -vfs
+fc-cache -fs
 # EULA accepted true
 # mkdir -p /home/$USER/.config/Kingsoft
 mkdir -p /home/users/$USER/.config/Kingsoft
