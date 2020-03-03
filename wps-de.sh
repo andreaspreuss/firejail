@@ -27,7 +27,7 @@ fc-cache -vfs
 # mkdir -p /home/$USER/.config/Kingsoft
 mkdir -p ${HOME}/.config/Kingsoft
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/$USER/.config/Kingsoft/
-chmod 644 /home/$USER/.config/Kingsoft/*
+chmod 644 ${HOME}/.config/Kingsoft/*
 # install firejail
 apt-get install -y firejail firejail-profiles firetools
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wps.profile -P /etc/firejail/
