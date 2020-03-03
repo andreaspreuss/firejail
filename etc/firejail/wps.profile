@@ -131,3 +131,7 @@ noexec ${HOME}
 noexec /tmp
 name firejailed-wps
 # join-or-start /usr/bin/wps %F
+
+# delete unnecassary directories
+rm -rf ${HOME}/.kingsoft
+rm -rf ${HOME}/$USER/模板
