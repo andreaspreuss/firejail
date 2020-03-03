@@ -1,6 +1,6 @@
-#/opt/kingsoft/wps-office/office6/et
+#/ opt/kingsoft/wps-office/office6/et
 # Firejail profile for et
-# Description: WPS Office - Excel
+# Description: WPS Office - Spreadsheets
 # This file is overwritten after every install/update
 # Persistent local customizations
 include et.local
