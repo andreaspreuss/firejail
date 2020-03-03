@@ -24,12 +24,10 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/shar
 chmod 644 /usr/share/fonts/wps-fonts/*
 fc-cache -vfs
 # EULA accepted true
-mkdir -p /home/$USER/.config/Kingsoft
+# mkdir -p /home/$USER/.config/Kingsoft
+mkdir -p ${HOME}/.config/Kingsoft
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/$USER/.config/Kingsoft/
 chmod 644 /home/$USER/.config/Kingsoft/*
-# delete unnecassary directories
-rm -rf /home/$USER/.kingsoft
-rm -rf /home/$USER/模板
 # install firejail
 apt-get install -y firejail firejail-profiles firetools
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wps.profile -P /etc/firejail/
