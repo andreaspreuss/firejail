@@ -44,9 +44,12 @@ firecfg
 # ln -s /usr/bin/wps /usr/local/bin/wps
 # ln -s /usr/bin/wpp /usr/local/bin/wpp
 # ln -s /usr/bin/wpspdf /usr/local/bin/wpspdf
-# delete unnecessay files
+# delete unnecessay files & packages
 rm -f de_DE.7z 
 rm -f wps-office_11.1.0.9126.XA_amd64.deb
 apt-get remove -y p7zip-full 
+# delete unnecassary directories
+rm -rf ${HOME}/.kingsoft
+rm -rf ${HOME}/$USER/模板
 apt-get clean
 apt-get autoremove
