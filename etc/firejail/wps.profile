@@ -58,7 +58,7 @@ protocol unix
 # Das Programm direkt, ohne eine Benutzershell, ausführen 
 shell none 
 # Standardmäßig den seccomp-Filter aktivieren und die Syscalls auf eine schwarze Liste setzen
-seccomp
+# seccomp
 # kein Internet
 net none                            
 # Kein Sound
