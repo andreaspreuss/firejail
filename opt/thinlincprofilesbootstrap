@@ -1,3 +1,0 @@
-#!/bin/sh
-aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/profilesync /opt/profilesync --region eu-central-1
-bash /opt/profilesync
