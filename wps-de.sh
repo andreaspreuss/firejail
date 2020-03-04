@@ -3,7 +3,7 @@
 # Install Kingsoft WPS-Office with firejail - chmod a+x wps-de.sh - ./wps-de.sh
 # wget -O - https://raw.githubusercontent.com/andreaspreuss/firejail/master/wps-de.sh | sudo bash 
 #
-# Download newest Kingsoft WPS Office direct from china
+# Download newest Kingsoft WPS Office directly from china
 # wget -c http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/9080/wps-office_11.1.0.9080.XA_amd64.deb
 wget -c http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/9126/wps-office_11.1.0.9126.XA_amd64.deb
 # dpkg -i wps-office_11.1.0.9080.XA_amd64.deb
@@ -53,7 +53,7 @@ firecfg
 rm -f de_DE.7z 
 rm -f wps-office_11.1.0.9126.XA_amd64.deb
 apt-get remove -y p7zip-full 
-# delete unnecassary directories
+# delete unnecassary directories as user
 rm -rf /home/users/$USER/.kingsoft
 rm -rf /home/users/$USER/模板
 apt-get -y autoremove
