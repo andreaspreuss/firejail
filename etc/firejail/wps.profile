@@ -68,9 +68,9 @@ no3d
 # Keine DVD Medien
 nodvd
 # Keine Videomedien
-novideo
+# novideo
 # Kein TV 
-notv
+# notv
 
 tracelog
 nodbus
