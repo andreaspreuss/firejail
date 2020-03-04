@@ -77,7 +77,7 @@ nodbus
 
 ## Dateisystem
 # Ein neues Heimverzeichnis erstellen, das nach Abschluss der Anwendung wieder gelöscht wird.
-# Bei Aktivierung startet immer das WPS Lizenzpopup beim Start
+# Bei Aktivierung startet leider immer das WPS EULA Lizenzpopup beim Start - das ist aber hier unerwünscht !
 # private 
 
 # Erstellt neues /bin Verzeichnis. 
