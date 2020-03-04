@@ -13,9 +13,13 @@ apt-get install -f
 apt-get install -y p7zip-full
 wget https://github.com/andreaspreuss/firejail/raw/master/opt/kingsoft/wps-office/office6/mui/de_DE.7z
 7za x de_DE.7z -y -o/opt/kingsoft/wps-office/office6/mui
+# install german spellcheck
 mkdir -p /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/main.dic -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/main.aff -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/dict.conf -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
 # install ms fonts
-# mkdir /usr/share/fonts/wps-fonts
+# mkdir -p /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WEBDINGS.TTF -P /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WINGDNG2.ttf -P /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WINGDNG3.ttf -P /usr/share/fonts/wps-fonts
