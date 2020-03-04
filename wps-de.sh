@@ -56,5 +56,5 @@ apt-get remove -y p7zip-full
 # delete unnecassary directories
 rm -rf /home/users/$USER/.kingsoft
 rm -rf /home/users/$USER/模板
-apt-get clean
-apt-get autoremove
+apt-get -y autoremove
+apt-get clean all
