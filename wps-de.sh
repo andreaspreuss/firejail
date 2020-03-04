@@ -18,7 +18,7 @@ mkdir -p /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/main.dic -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/main.aff -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/dict.conf -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
-# install german desktop files
+# install firejailing german desktop files 
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-et.desktop -P /opt/kingsoft/wps-office/desktops/wps-office-et.desktop
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-pdf.desktop -P /opt/kingsoft/wps-office/desktops/wps-office-pdf.desktop
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-prometheus.desktop -P /opt/kingsoft/wps-office/desktops/wps-office-prometheus.desktop
