@@ -34,11 +34,6 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/shar
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/mtextra.ttf -P /usr/share/fonts/wps-fonts
 chmod 644 /usr/share/fonts/wps-fonts/*
 fc-cache -fs
-# EULA accepted true
-# mkdir -p /home/$USER/.config/Kingsoft
-mkdir -p /home/users/$USER/.config/Kingsoft
-wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/users/$USER/.config/Kingsoft/
-chmod 644 /home/users/$USER/.config/Kingsoft/*
 # install firejail
 apt-get install -y firejail firejail-profiles firetools
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wps.profile -P /etc/firejail/
@@ -55,12 +50,18 @@ firecfg
 # ln -s /usr/bin/wps /usr/local/bin/wps
 # ln -s /usr/bin/wpp /usr/local/bin/wpp
 # ln -s /usr/bin/wpspdf /usr/local/bin/wpspdf
-# delete unnecessay files & packages
-rm -f de_DE.7z 
-rm -f wps-office_11.1.0.9126.XA_amd64.deb
-apt-get remove -y p7zip-full 
 # delete unnecassary directories as user
 rm -rf /home/users/$USER/.kingsoft
 rm -rf /home/users/$USER/模板
+# EULA accepted true
+# mkdir -p /home/$USER/.config/Kingsoft
+mkdir -p /home/users/$USER/.config/Kingsoft
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/users/$USER/.config/Kingsoft/
+chmod 644 /home/users/$USER/.config/Kingsoft/*
+# delete unnecessay files & packages
+rm -rf de_DE.7z 
+rm -rf wps-office_11.1.0.9126.XA_amd64.deb
+apt-get remove -y p7zip-full 
+# cleanup
 apt-get -y autoremove
 apt-get clean all
