@@ -1,12 +1,12 @@
 [Desktop Entry]
 Comment=Kingsoft Pdf Reader
-Comment[zh_CN]=金山PDF阅读器
-Exec=/usr/bin/wpspdf %F
+Comment[de_DE]=Kingsoft PDF Leseprogramm
+Exec=firejail /usr/bin/wpspdf %F
 GenericName=Kingsoft Pdf Reader
-GenericName[zh_CN]=金山 PDF
+GenericName[de_DE]=Kingsoft Pdf Reader
 MimeType=application/wps-office.pdf;application/pdf
 Name=WPS PDF
-Name[zh_CN]=金山 PDF
+Name[de_DE]=WPS PDF
 StartupNotify=false
 Terminal=false
 Type=Application
