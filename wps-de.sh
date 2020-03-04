@@ -19,11 +19,11 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/king
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/main.aff -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/dict.conf -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
 # install firejailing german desktop files 
-wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-et.desktop -P /opt/kingsoft/wps-office/desktops/wps-office-et.desktop
-wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-pdf.desktop -P /opt/kingsoft/wps-office/desktops/wps-office-pdf.desktop
-wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-prometheus.desktop -P /opt/kingsoft/wps-office/desktops/wps-office-prometheus.desktop
-wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-wpp.desktop -P /opt/kingsoft/wps-office/desktops/wps-office-wpp.desktop
-wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-wps.desktop -P /opt/kingsoft/wps-office/desktops/wps-office-wps.desktop
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-et.desktop -P /opt/kingsoft/wps-office/desktops
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-pdf.desktop -P /opt/kingsoft/wps-office/desktops
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-prometheus.desktop -P /opt/kingsoft/wps-office/desktops
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-wpp.desktop -P /opt/kingsoft/wps-office/desktops
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-wps.desktop -P /opt/kingsoft/wps-office/desktops
 # install ms fonts
 # mkdir -p /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WEBDINGS.TTF -P /usr/share/fonts/wps-fonts
