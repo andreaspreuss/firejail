@@ -1,0 +1,387 @@
+#!/bin/sh
+echo "Starting thinlincagent-prd bootstrap"
+export DEBIAN_FRONTEND=noninteractive
+apt-get install -y ldap-utils xfce4 xfce4-power-manager medit mc xfce4-terminal python-apt cups printer-driver-cups-pdf chromium debconf-utils software-properties-common
+apt-get -y --purge remove libnss-mdns
+aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/tl-4.10.1-server.zip tl-setup.zip --region eu-central-1
+
+sudo unzip tl-setup.zip
+rm tl-setup.zip
+
+dpkg -i -E ./tl-4.10.1-server/packages/*all.deb
+dpkg -i -E ./tl-4.10.1-server/packages/*amd64.deb
+
+cat > /tc_master_auto <<'EOF'
+# ThinLinc tl-setup answers file
+
+# Edit this file to suit your systems and run:
+#  /opt/thinlinc/sbin/tl-setup -a THIS-FILE
+
+# Install pygtk packages?
+install-pygtk=yes
+
+# Send administrative messages to:
+email-address=operations@daarwin.de
+
+# Set up SELinux policy module?
+setup-selinux=yes
+
+# Set up the nearest printing queue?
+setup-nearest=no
+
+# Configure as master or agent
+server-type=agent
+
+# Configure the local firewall for ThinLinc services?
+setup-firewall=yes
+
+# Install python-ldap packages?
+install-python-ldap=yes
+
+# Set up AppArmor configuration?
+setup-apparmor=yes
+
+# What should tl-setup do when it encounters a question without a matching answer in the answer file?
+missing-answer=ask
+
+# Install nfs client packages?
+install-nfs=yes
+
+# Set up the thinlocal printing queue?
+setup-thinlocal=yes
+
+# Install OpenSSH server?
+install-sshd=yes
+
+# Password for tlwebadm (generate with "python /opt/thinlinc/sbin/tl-gen-auth"):
+tlwebadm-password=$6$57349fff8700c4ff$7g5MvWFJPYswAkDMl2H4puF5gL5HdJu9GSwMfDD7pz0WY2Ixk3iKrCck1Npz0X143NugMXZV9eBKwCGeHLh3Y.
+
+# Accept the End User License Agreement
+accept-eula=yes
+
+# How should old configuration files be handled?
+migrate-conf=ignore
+
+# Install required libraries and binaries?
+install-required-libs=yes
+EOF
+
+/opt/thinlinc/sbin/tl-setup -a /tc_master_auto
+
+/opt/thinlinc/bin/tl-config /vsmagent/agent_hostname=thinlincagent18.aws-prd.daarwin.de
+/opt/thinlinc/bin/tl-config /vsmagent/master_hostname=thinlincmaster.prd.daarwin.local
+/opt/thinlinc/bin/tl-config /vsmagent/xserver_args="-br -localhost -verbose 3 -MaxIdleTime 1800 -MaxDisconnectionTime 1860"
+/opt/thinlinc/bin/tl-config /sessionstart/keyboard_layout=de
+/opt/thinlinc/bin/tl-config /profiles/show_intro=false
+/opt/thinlinc/bin/tl-config /vsmagent/make_homedir=0
+
+#Copy default wine profile
+aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/wineprofile.zip wineprofile.zip --region eu-central-1
+unzip wineprofile.zip -d /etc/skel/
+rm wineprofile.zip
+
+#Do this in one action some day
+aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/fonts_wine.zip fonts_wine.zip --region eu-central-1
+rm /etc/skel/.wine/drive_c/windows/Fonts/*.*
+unzip fonts_wine.zip -d /etc/skel/.wine/drive_c/windows/Fonts/
+rm fonts_wine.zip
+
+#Create script to fix symbolic link on logon
+echo 'rm $HOME/.wine/dosdevices/h\:' >> /opt/thinlinc/libexec/tl-run-xstartup.d
+echo 'ln -s $HOME $HOME/.wine/dosdevices/h\:' >> /opt/thinlinc/libexec/tl-run-xstartup.d
+
+#ln -s /opt/thinlinc/libexec/tl-homecreatefilter.sh /opt/thinlinc/etc/xstartup.d/06-tl-homecreatefilter.sh
+#Install License files
+aws s3 sync s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/license /opt/thinlinc/etc/licenses/ --region eu-central-1
+service vsmagent restart
+
+#install printer patch
+aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/generic-pdf.ppd /opt/thinlinc/share/ppd/thinlinc/generic-pdf.ppd --region eu-central-1
+lpadmin -p thinlocal -P /opt/thinlinc/share/ppd/thinlinc/generic-pdf.ppd
+lpoptions -d thinlocal
+
+#reconfigure
+/opt/thinlinc/sbin/tl-setup -a /tc_master_auto
+
+#Enable Password Authentication
+sed -i "s@PasswordAuthentication no@PasswordAuthentication yes@g" /etc/ssh/sshd_config
+service ssh restart
+
+#LDAP Integration
+export DEBIAN_FRONTEND=noninteractive
+
+# Pre-seed libnss-ldap 
+cat > /root/debconf-libnss-ldap.conf << 'EOF'
+libnss-ldap     libnss-ldap/rootbindpw  password
+libnss-ldap:amd64       libnss-ldap/rootbindpw  password
+libnss-ldap     libnss-ldap/bindpw      password
+libnss-ldap:amd64       libnss-ldap/bindpw      password
+libnss-ldap     libnss-ldap/dbrootlogin boolean false
+libnss-ldap:amd64       libnss-ldap/dbrootlogin boolean false
+libnss-ldap     shared/ldapns/ldap_version      select  3
+libnss-ldap:amd64       shared/ldapns/ldap_version      select  3
+libnss-ldap     shared/ldapns/base-dn   string  dc=ad,dc=prd,dc=daarwin,dc=local
+libnss-ldap:amd64       shared/ldapns/base-dn   string  dc=ad,dc=prd,dc=daarwin,dc=local
+libnss-ldap     libnss-ldap/confperm    boolean false
+libnss-ldap:amd64       libnss-ldap/confperm    boolean false
+libnss-ldap     libnss-ldap/dblogin     boolean false
+libnss-ldap:amd64       libnss-ldap/dblogin     boolean false
+libnss-ldap     shared/ldapns/ldap-server       string  ldap://10.5.4.114
+libnss-ldap:amd64       shared/ldapns/ldap-server       string  ldap://10.5.4.114
+libnss-ldap     libnss-ldap/nsswitch    note
+libnss-ldap:amd64       libnss-ldap/nsswitch    note
+libnss-ldap     libnss-ldap/binddn      string  cn=proxyuser,dc=example,dc=net
+libnss-ldap:amd64       libnss-ldap/binddn      string  cn=proxyuser,dc=example,dc=net
+libnss-ldap     libnss-ldap/override    boolean true
+libnss-ldap:amd64       libnss-ldap/override    boolean true
+libnss-ldap     libnss-ldap/rootbinddn  string  cn=manager,dc=example,dc=net
+EOF
+cat /root/debconf-libnss-ldap.conf | debconf-set-selections
+
+# Pre-seed libpam-ldap 
+cat > /root/debconf-libpam-ldap.conf << 'EOF'
+libpam-ldap     libpam-ldap/bindpw      password
+libpam-ldap:amd64       libpam-ldap/bindpw      password
+libpam-ldap     libpam-ldap/rootbindpw  password
+libpam-ldap:amd64       libpam-ldap/rootbindpw  password
+libpam-ldap     libpam-ldap/dblogin     boolean false
+libpam-ldap:amd64       libpam-ldap/dblogin     boolean false
+libpam-ldap     libpam-ldap/dbrootlogin boolean false
+libpam-ldap:amd64       libpam-ldap/dbrootlogin boolean false
+libpam-ldap     shared/ldapns/ldap-server       string  ldap://10.5.4.114
+libpam-ldap:amd64       shared/ldapns/ldap-server       string  ldap://10.5.4.114
+libpam-ldap     shared/ldapns/base-dn   string  dc=ad,dc=prd,dc=daarwin,dc=local
+libpam-ldap:amd64       shared/ldapns/base-dn   string  dc=ad,dc=prd,dc=daarwin,dc=local
+libpam-ldap     libpam-ldap/rootbinddn  string  cn=manager,dc=example,dc=net
+libpam-ldap:amd64       libpam-ldap/rootbinddn  string  cn=manager,dc=example,dc=net
+libpam-ldap     libpam-ldap/pam_password        select  crypt
+libpam-ldap:amd64       libpam-ldap/pam_password        select  crypt
+libpam-ldap     shared/ldapns/ldap_version      select  3
+libpam-ldap:amd64       shared/ldapns/ldap_version      select  3
+libpam-ldap     libpam-ldap/binddn      string  cn=proxyuser,dc=example,dc=net
+libpam-ldap:amd64       libpam-ldap/binddn      string  cn=proxyuser,dc=example,dc=net
+libpam-ldap     libpam-ldap/override    boolean true
+libpam-ldap:amd64       libpam-ldap/override    boolean true
+EOF
+cat /root/debconf-libpam-ldap.conf | debconf-set-selections
+
+#End preseed
+apt-get install -y libnss-ldap libpam-ldap nscd
+
+#Configure ldap.conf
+sed -i "s@#BASE@BASE@g" /etc/ldap/ldap.conf
+sed -i "s@#URI@URI@g" /etc/ldap/ldap.conf
+
+sed -i "s@dc=example,dc=com@dc=ad,dc=prd,dc=daarwin,dc=local@g" /etc/ldap/ldap.conf
+sed -i "s@ldap://ldap.example.com ldap://ldap-master.example.com:666@ldap://10.5.4.114@g" /etc/ldap/ldap.conf
+
+#Configure nsswitch.conf  deb10
+sed -i "s@passwd:         files systemd@passwd:         compat ldap@g" /etc/nsswitch.conf
+sed -i "s@group:          files systemd@group:            compat ldap@g" /etc/nsswitch.conf
+sed -i "s@shadow:         files@shadow:         compat ldap@g" /etc/nsswitch.conf
+sed -i "s@netgroup:       nis@netgroup: ldap@g" /etc/nsswitch.conf
+
+#Configure common-auth  
+# sed -i "s@pam_unix.so nullok_secure@pam_unix.so nullok_secure try_first_pass@g" /etc/pam.d/common-auth
+rm /etc/pam.d/common-auth
+cat > /etc/pam.d/common-auth << 'EOF'
+#
+# /etc/pam.d/common-auth - authentication settings common to all services
+#
+# This file is included from other service-specific PAM config files,
+# and should contain a list of the authentication modules that define
+# the central authentication scheme for use on the system
+# (e.g., /etc/shadow, LDAP, Kerberos, etc.).  The default is to use the
+# traditional Unix authentication mechanisms.
+#
+# As of pam 1.0.1-6, this file is managed by pam-auth-update by default.
+# To take advantage of this, it is recommended that you configure any
+# local modules either before or after the default block, and use
+# pam-auth-update to manage selection of other modules.  See
+# pam-auth-update(8) for details.
+# here are the per-package modules (the "Primary" block)
+auth    [success=2 default=ignore]      pam_ldap.so try_first_pass
+auth    [success=1 default=ignore]      pam_unix.so nullok_secure use_first_pass
+# here's the fallback if no module succeeds
+auth    requisite                       pam_deny.so
+# prime the stack with a positive return value if there isn't one already;
+# this avoids us returning an error just because nothing sets a success code
+# since the modules above will each just jump around
+auth    required                        pam_permit.so
+# and here are more per-package modules (the "Additional" block)
+auth    optional                        pam_cap.so
+# end of pam-auth-update config
+EOF
+
+#Create Logout script
+cat > /opt/thinlinc/etc/xlogout.d/99-logoff.sh << 'EOF'
+#!/bin/sh
+logger $USER logged off from thinlinc
+EOF
+chmod +x /opt/thinlinc/etc/xlogout.d/99-logoff.sh
+
+#Create rsyslog trigger on logout 
+cat >> /etc/rsyslog.conf << 'EOF'
+if $msg contains_i 'logged off from thinlinc' then {
+   ^/opt/removehomedir.sh
+}
+EOF
+
+#Create remove script
+cat > /opt/removehomedir.sh << 'EOF'
+#!/bin/sh
+username="$( echo $1 | awk '{ print $6 }' )"
+rm -rf "/home/users/$username"
+EOF
+chmod +x /opt/removehomedir.sh
+
+#Configure common-session
+echo "session required pam_mkhomedir.so skel=/etc/skel umask=077" >> /etc/pam.d/common-session
+# Restart nscd
+systemctl restart nscd
+
+#Configure SSL for HTML5 client
+aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/wildcard/daarwin.zip daarwin.zip --region eu-central-1
+mkdir /etc/cert
+mkdir /etc/cert/aws-prd.daarwin.de
+unzip daarwin.zip -d /etc/cert/aws-prd.daarwin.de/
+rm daarwin.zip
+chmod go-r /etc/cert/aws-prd.daarwin.de/aws-prd.daarwin.de.key.pem
+/opt/thinlinc/bin/tl-config /webaccess/cert=/etc/cert/aws-prd.daarwin.de/aws-prd.daarwin.de.crt.ca.pem
+/opt/thinlinc/bin/tl-config /webaccess/certkey=/etc/cert/aws-prd.daarwin.de/aws-prd.daarwin.de.key.pem
+aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/tlwebaccess/www/images/tlbadge.svg tlbadge.svg --region eu-central-1
+rm /opt/thinlinc/share/tlwebaccess/www/images/tlbadge.svg
+mv tlbadge.svg /opt/thinlinc/share/tlwebaccess/www/images/tlbadge.svg
+
+#PATCH ZOMBIE PROCESS!
+aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/tl-xinit tl-xinit --region eu-central-1
+rm /opt/thinlinc/libexec/tl-xinit
+mv tl-xinit /opt/thinlinc/libexec/tl-xinit
+chmod +x /opt/thinlinc/libexec/tl-xinit
+
+#Enable KillUserProcesses
+sed -i "s@#ReserveVT=6@KillUserProcesses=yes@g" /etc/systemd/logind.conf
+
+#AGENT ONLY!
+
+#Copy QMC
+wget https://fvzgusuc438no58m.de/aws/QMC.zip
+unzip QMC -d /
+rm QMC.zip
+
+#install Wine & Winetricks
+dpkg --add-architecture i386
+wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
+apt-add-repository https://dl.winehq.org/wine-builds/debian/
+apt update
+apt install -y winehq-stable
+cd ~
+wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+chmod +x winetricks
+
+#Crossover Install
+# dpkg --add-architecture i386
+# apt-get update
+# apt-get install -y gdebi
+# #wget http://crossover.codeweavers.com/redirect/crossover.deb #Put on S3
+# aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/crossover.deb crossover.deb --region eu-central-1
+# gdebi -n crossover.deb
+# yes | /opt/cxoffice/bin/cxfix --auto
+# rm crossover.deb
+# #TODO > REGISTER crossover, needs license file! #Put on S3
+
+#Install WPS
+# wget http://kdl.cc.ksosoft.com/wps-community/download/8865/wps-office_11.1.0.8865_amd64.deb #Put on S3
+# aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/wps-office_11.1.0.8865_amd64.deb wps-office_11.1.0.8865_amd64.deb --region eu-central-1
+# apt-get install -y xdg-utils
+# dpkg -i wps-office_11.1.0.8865_amd64.deb
+# #wget https://fvzgusuc438no58m.de/aws/fonts.zip #Put on S3
+# aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/fonts.zip fonts.zip --region eu-central-1
+# unzip fonts.zip -d /usr/share/fonts
+# #wget http://wps-community.org/download/dicts/de_DE.zip #Put on S3
+# aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/de_DE.zip de_DE.zip --region eu-central-1
+# unzip de_DE.zip -d /etc/skel/
+# rm de_DE.zip
+# rm fonts.zip
+# rm wps-office_11.1.0.8865_amd64.deb
+
+# Install Kingsoft WPS-Office without internet in jailed snap container 
+# apt install -y snapd
+# snap install wps-office-multilang
+
+# Install Kingsoft WPS-Office with firejail
+wget -c http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/9080/wps-office_11.1.0.9080.XA_amd64.deb
+# aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/wps-office_11.1.0.9080.XA_amd64.deb wps-office_11.1.0.9080.XA_amd64.deb --region eu-central-1
+apt-get install -y wps-office_11.1.0.9080.XA_amd64.deb
+apt --fix-broken install
+# install german language
+apt-get install -y p7zip-full
+wget https://github.com/timxx/wps-office-mui/raw/master/mui/de_DE.7z
+7za x de_DE.7z -o/opt/kingsoft/wps-office/office6/mui
+# install ms fonts
+mkdir /usr/share/fonts/wps-fonts
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WEBDINGS.TTF -P /usr/share/fonts/wps-fonts
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WINGDNG2.ttf -P /usr/share/fonts/wps-fonts
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WINGDNG3.ttf -P /usr/share/fonts/wps-fonts
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/symbol.ttf -P /usr/share/fonts/wps-fonts
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/wingding.ttf -P /usr/share/fonts/wps-fonts
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/mtextra.ttf -P /usr/share/fonts/wps-fonts
+chmod 644 /usr/share/fonts/wps-fonts/*
+fc-cache -vfs
+# EULA Accepted true
+md ~/.config/Kingsoft
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P $HOME/$USERNAME/.config/Kingsoft/
+# install firejail
+apt-get install -y firejail firejail-profiles
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wps.profile -P /etc/firejail/
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wpspdf.profile -P /etc/firejail/
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wpp.profile -P /etc/firejail/
+echo "wps" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
+echo "wpspdf" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
+echo "wpp" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
+# initialize firejail
+firecfg
+firecfg --fix
+rm de_DE.7z 
+rm wps-office_11.1.0.9080.XA_amd64.deb
+rm -r $HOME/.kingsoft
+apt-get remove -y p7zip-full 
+apt-get autoclean
+
+#Remove unneccesary profiles and run the profilesync util at first boot
+/opt/thinlinc/bin/tl-config /profiles/order="xfce"
+
+#Create profilesync bootstrap script and create cronjob
+cat > /opt/thinlincprofilesbootstrap << 'EOF'
+#!/bin/sh
+aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/profilesync /opt/profilesync --region eu-central-1
+bash /opt/profilesync
+EOF
+chmod +x /opt/thinlincprofilesbootstrap
+/opt/thinlincprofilesbootstrap
+
+# Create a cron job to run the bootstrap every 10 minutes
+echo "*/10 * * * * root /opt/thinlincprofilesbootstrap" >> thinlinc-bootstrap-cron
+mv thinlinc-bootstrap-cron /etc/cron.d/
+
+#Install Fail2ban and restart rsyslog
+apt-get install -y fail2ban
+
+service rsyslog restart
+service vsmagent restart
+#service vsmserver restart
+
+#Set default runlevel and disable wine debugging
+systemctl set-default multi-user.target
+echo "WINEDEBUG=\"-all\"" >> /etc/environment
+
+echo "End thinlincagent-prd Script"
+#Reboot to make the runlevel change active, delete last files
+
+rm tc_master_auto
+rm amazon-cloudwatch-agent.deb
+
+# Restart nscd
+systemctl restart nscd
+
+reboot
