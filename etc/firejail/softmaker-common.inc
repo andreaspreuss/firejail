@@ -17,26 +17,26 @@ noblacklist ${HOME}/SoftMaker
 
 include /etc/firejail/disable-common.inc
 include /etc/firejail/disable-devel.inc
-include /etc/firejail/disable-exec.inc
-include /etc/firejail/disable-interpreters.inc
+# include /etc/firejail/disable-exec.inc
+# include /etc/firejail/disable-interpreters.inc
 include /etc/firejail/disable-passwdmgr.inc
-include /etc/firejail/disable-programs.inc
+# include /etc/firejail/disable-programs.inc
 
-whitelist /usr/share/office2018
-whitelist /usr/share/freeoffice2018
+# whitelist /usr/share/office2018
+# whitelist /usr/share/freeoffice2018
 include /etc/firejail/whitelist-common.inc
-include /etc/firejail/whitelist-var-common.inc
+# include /etc/firejail/whitelist-var-common.inc
 
 blacklist /mnt
 blacklist /media
 
-apparmor
+# apparmor
 caps.drop all
-ipc-namespace
+# ipc-namespace
 net none
-nodbus
+# nodbus
 nodvd
-nogroups
+# nogroups
 nonewprivs
 noroot
 notv
@@ -45,7 +45,7 @@ seccomp
 shell none
 tracelog
 
-private-bin freeoffice-planmaker,freeoffice-presentations,freeoffice-textmaker,planmaker18,planmaker18free,presentations18,presentations18free,sh,textmaker18,textmaker18free
+private-bin freeoffice-planmaker,freeoffice-presentations,freeoffice-textmaker,planmaker18,planmaker18free,presentations18,presentations18free,sh,textmaker18,textmaker18free,textmaker,presentations,planmaker
 private-cache
 private-dev
 private-etc ca-certificates,fonts,ld.so.cache,ld.so.conf,ld.so.conf.d,ld.so.preload,machine-id,nsswitch.conf,pki,SoftMaker,ssl
