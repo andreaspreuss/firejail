@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 echo "Installation von Freeoffice"
 wget -c https://www.softmaker.net/down/softmaker-freeoffice-2018_974-01_amd64.deb
 dpkg -i softmaker-freeoffice-2018_974-01_amd64.deb
