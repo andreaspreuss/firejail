@@ -15,31 +15,32 @@ include softmaker-common.local
 
 noblacklist ${HOME}/SoftMaker
 
-include disable-common.inc
-include disable-devel.inc
-include disable-exec.inc
-include disable-interpreters.inc
-include disable-passwdmgr.inc
-include disable-programs.inc
+include /etc/firejail/disable-common.inc
+include /etc/firejail/disable-devel.inc
+include /etc/firejail/disable-exec.inc
+include /etc/firejail/disable-interpreters.inc
+include /etc/firejail/disable-passwdmgr.inc
+include /etc/firejail/disable-programs.inc
 
 whitelist /usr/share/office2018
 whitelist /usr/share/freeoffice2018
-include whitelist-usr-share-common.inc
-include whitelist-var-common.inc
+include /etc/firejail/whitelist-common.inc
+include /etc/firejail/whitelist-var-common.inc
+
+blacklist /mnt
+blacklist /media
 
 apparmor
 caps.drop all
 ipc-namespace
-#netfilter
+net none
 nodbus
 nodvd
 nogroups
 nonewprivs
 noroot
 notv
-nou2f
 novideo
-protocol inet
 seccomp
 shell none
 tracelog
@@ -50,10 +51,8 @@ private-dev
 private-etc ca-certificates,fonts,ld.so.cache,ld.so.conf,ld.so.conf.d,ld.so.preload,machine-id,nsswitch.conf,pki,SoftMaker,ssl
 private-tmp
 
-
-
 # memory-deny-write-execute
-#noexec ${HOME}
-#noexec /tmp
-#name firejailed-softmakeroffice
+# noexec ${HOME}
+noexec /tmp
+# name firejailed-softmakeroffice
 # join-or-start /usr/bin/ %f
