@@ -53,6 +53,6 @@ private-tmp
 
 # memory-deny-write-execute
 # noexec ${HOME}
-noexec /tmp
+# noexec /tmp
 # name firejailed-softmakeroffice
 # join-or-start /usr/bin/ %f
