@@ -10,3 +10,7 @@ This is a small modification with wps-Office to run firejailed on an preconfigur
 Install Kingsoft WPS Office in german :  
 
 `wget -O - https://raw.githubusercontent.com/andreaspreuss/firejail/master/wps-de.sh | sudo bash`
+
+Install Softmaker Freeoffice german :
+
+`wget -O - https://raw.githubusercontent.com/andreaspreuss/firejail/master/fo-de.sh | sudo bash`
