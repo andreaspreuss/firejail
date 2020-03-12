@@ -41,7 +41,7 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/fire
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wpp.profile -P /etc/firejail/
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/et.profile -P /etc/firejail/
 # wine should not start with firejail
-grep -v "wine" /usr/lib/x86_64-linux-gnu/firejail/firecfg.config > /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
+sed -i '470 s/^/# /' /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 rm -v /etc/firejail/wine*
 echo "et" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wps" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
