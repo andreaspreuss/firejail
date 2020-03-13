@@ -6,12 +6,13 @@ include wps.local
 ## Persistente globale Definitionen
 include globals.local
 ## Name: Andreas Preuss
-## 07.02.2019
+## 13.03.2020
 ## Version 1.0
 ## ---------------------------------------------------------------
 ## Zugriff deaktivieren
 # Zugangsverbot zu Systemmanagement Werkzeugen (sudo, mount, etc.) 
-include /etc/firejail/disable-common.inc 
+# muss bei Verwendung von Thinlinc Server deaktiviert bleiben!
+# include /etc/firejail/disable-common.inc 
 
 # Zugangsverbot zu Systemprogrammen ${HOME} 
 include /etc/firejail/disable-programs.inc 
@@ -28,7 +29,7 @@ include /etc/firejail/disable-interpreters.inc
 # Anwendung unabhängig vom Terminal gestellt
 include /etc/firejail/disable-xdg.inc
 
-include whitelist-var-common.inc
+# include whitelist-var-common.inc
 
 # Erlaubte Pfade von WPS Office
 noblacklist /usr/local/sbin
@@ -41,6 +42,7 @@ noblacklist ${HOME}/.wps
 noblacklist ${HOME}/.cache
 noblacklist ${HOME}/.kingsoft
 noblacklist ${DOCUMENTS}
+noblacklist ${HOME}/Vorlage
 
 ## Sicherheitsfilter 
 # Schwarze Liste aller Linux-Funktionen
@@ -57,22 +59,29 @@ nogroups
 protocol unix
 # Das Programm direkt, ohne eine Benutzershell, ausführen 
 shell none 
-# Standardmäßig den seccomp-Filter aktivieren und die Syscalls auf eine schwarze Liste setzen
+# Standardmäßig den seccomp-Filter aktivieren und die Syscalls auf eine
+#  schwarze Liste setzen - PID hängt allerdings wenn aktiviert!
 # seccomp
+
 # kein Internet
 net none                            
+
 # Kein Sound
 nosound
+
 # Kein 3D
 no3d
+
 # Keine DVD Medien
 nodvd
-# Keine Videomedien
-# novideo
-# Kein TV 
-# notv
 
-tracelog
+# Keine Videomedien
+novideo
+
+# Kein TV 
+notv
+
+# tracelog
 nodbus
 
 ## Dateisystem
@@ -82,8 +91,9 @@ nodbus
 
 # Erstellt neues /bin Verzeichnis. 
 # Dadurch werden bestimmte Binärdateien in /usr/bin auf die Whitelist gesetzt und alles andere auf die schwarze Liste gesetzt.
-private-bin bash,dirname,env,expr,file,grep,rm,sh,wps,wpp,wpspdf
+# private-bin bash,dirname,env,expr,file,grep,rm,sh,wps,wpp,wpspdf
 
+# Einen leeren cache in einem temporären Dateisystem erzeugen
 private-cache
 
 # Dies stellt Dateien/Geräte unter /dev auf eine Whitelist und alles andere auf eine schwarze Liste
@@ -92,8 +102,9 @@ private-dev
 # Erstellet ein neues /etc-Verzeichnis in einem temporären Dateisystem
 private-etc ssl
 
-# Erstellet ein neues /lib-Verzeichnis
-# private-lib 
+# Erstellet ein neues /lib-Verzeichnis 
+# Muss bei Verwendung von Thinlinc-Server deaktiviert bleiben!
+# private-lib libtinfo.so.6
 
 # Ein leeres temporäres Dateisystem über dem Verzeichnis /tmp einhängen
 private-tmp 
