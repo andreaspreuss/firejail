@@ -1,0 +1,18 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=wine /QMC/bin/QMCNEU.exe -SERVER "firebirddb02.prd.daarwin.local:/data1/charles.fdb" -ADRESSE "firebirddb02.prd.daarwin.local:/3050"
+Icon=insert-object
+Categories=Office;Science;X-XFCE;Xfce-Toplevel;
+OnlyShowIn=GNOME;XFCE;
+Name[DE]=QM-Center 2
+GenericName[de]=Daarwin QM-Center 2
+Comment=Daarwin Beratungsgesellschaft mbH - QM-Center 2
+Terminal=false
+Encoding=UTF-8
+StartupNotify=false
+InitialPreference=3
+StartupWMClass=qmcneu
+X-XFCE-Souce=file:///usr/share/applications/qmcneu.desktop
+Name=QMC
+Path=
