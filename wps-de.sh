@@ -22,6 +22,13 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/king
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-prometheus.desktop -P /opt/kingsoft/wps-office/desktops
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-wpp.desktop -P /opt/kingsoft/wps-office/desktops
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-wps.desktop -P /opt/kingsoft/wps-office/desktops
+# install mime mime connections for firejailed wps
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-et.desktop -P /usr/share/applications
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-pdf.desktop -P /usr/share/applications
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-prometheus.desktop -P /usr/share/applications
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-wpp.desktop -P /usr/share/applications
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-wps.desktop -P /usr/share/applications
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/qmcneu.desktop -P /usr/share/applications
 # install ms fonts
 # mkdir -p /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WEBDINGS.TTF -P /usr/share/fonts/wps-fonts
