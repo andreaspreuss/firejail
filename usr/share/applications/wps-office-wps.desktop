@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=Use WPS Writer to edit articles and reports.
 Comment[zh_CN]=使用 WPS 文字编写报告，排版文章
-Comment[de_DE]=WPS Writer zur Bearbeitung von Artikeln und Berichten verwenden
+Comment[de_DE]=WPS Writer zur Bearbeitung von Artikeln und Berichten verwenden.
 Exec=firejail /usr/bin/wps %U
 GenericName=WPS Writer
 GenericName[zh_CN]=WPS WPS 文字
