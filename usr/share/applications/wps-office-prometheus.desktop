@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=Use WPS Writer to office work.
-Comment[zh_CN]=\u4f7f\u7528 WPS 2019\u8fdb\u884c\u529e\u516c
+Comment[zh_CN]=使用 WPS 2019进行办公
 Comment[de_DE]=WPS Writer für die Büroarbeit verwenden
 Exec=firejail /usr/bin/wps %F
 GenericName=WPS
