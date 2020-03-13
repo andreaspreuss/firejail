@@ -4,16 +4,14 @@
 # wget -O - https://raw.githubusercontent.com/andreaspreuss/firejail/master/wps-de.sh | sudo bash 
 #
 # Download newest Kingsoft WPS Office directly from china
-# wget -c http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/9080/wps-office_11.1.0.9080.XA_amd64.deb
 wget -c http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/9126/wps-office_11.1.0.9126.XA_amd64.deb
-# dpkg -i wps-office_11.1.0.9080.XA_amd64.deb
 dpkg -i wps-office_11.1.0.9126.XA_amd64.deb
 apt-get install -f
-# install german language
+# install german language for wps
 apt-get install -y p7zip-full
 wget https://github.com/andreaspreuss/firejail/raw/master/opt/kingsoft/wps-office/office6/mui/de_DE.7z
 7za x de_DE.7z -y -o/opt/kingsoft/wps-office/office6/mui
-# install german spellcheck
+# install german spellcheck for wps
 mkdir -p /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/main.dic -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/main.aff -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
