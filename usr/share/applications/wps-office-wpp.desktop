@@ -1,0 +1,23 @@
+[Desktop Entry]
+Comment=Use WPS Presentation to edit and play presentations.
+Comment[zh_CN]=\u4f7f\u7528 WPS \u6f14\u793a\u7f16\u8f91\u3001\u64ad\u653e\u6f14\u793a\u6587\u7a3f
+Comment[de_DE]=WPS-Präsentation zum Bearbeiten und Abspielen von Präsentationen verwenden.
+Exec=firejail /usr/bin/wpp %F
+GenericName=WPS Presentation
+GenericName[zh_CN]=WPS \u6f14\u793a
+GenericName[de_DE]=WPS-Präsentation
+MimeType=application/wps-office.dps;application/wps-office.dpt;application/wps-office.dpss;application/wps-office.dpso;application/wps-office.ppt;application/wps-office.pot;application/vnd.ms-powerpoint;application/vnd.mspowerpoint;application/mspowerpoint;application/powerpoint;application/x-mspowerpoint;application/wps-office.pptx;application/wps-office.potx;application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.openxmlformats-officedocument.presentationml.slideshow
+Name=WPS Presentation
+Name[zh_CN]=WPS \u6f14\u793a
+Name[de_DE]=WPS-Präsentation
+StartupNotify=false
+Terminal=false
+Type=Application
+Categories=Office;Presentation;Qt;
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+Icon=wps-office2019-wppmain
+InitialPreference=3
+StartupWMClass=wpp
