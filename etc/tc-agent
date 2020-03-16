@@ -13,55 +13,38 @@ dpkg -i -E ./tl-4.10.1-server/packages/*amd64.deb
 
 cat > /tc_master_auto <<'EOF'
 # ThinLinc tl-setup answers file
-
 # Edit this file to suit your systems and run:
 #  /opt/thinlinc/sbin/tl-setup -a THIS-FILE
-
 # Install pygtk packages?
 install-pygtk=yes
-
 # Send administrative messages to:
 email-address=operations@daarwin.de
-
 # Set up SELinux policy module?
 setup-selinux=yes
-
 # Set up the nearest printing queue?
 setup-nearest=no
-
 # Configure as master or agent
 server-type=agent
-
 # Configure the local firewall for ThinLinc services?
 setup-firewall=yes
-
 # Install python-ldap packages?
 install-python-ldap=yes
-
 # Set up AppArmor configuration?
 setup-apparmor=yes
-
 # What should tl-setup do when it encounters a question without a matching answer in the answer file?
 missing-answer=ask
-
 # Install nfs client packages?
 install-nfs=yes
-
 # Set up the thinlocal printing queue?
 setup-thinlocal=yes
-
 # Install OpenSSH server?
 install-sshd=yes
-
 # Password for tlwebadm (generate with "python /opt/thinlinc/sbin/tl-gen-auth"):
 tlwebadm-password=$6$57349fff8700c4ff$7g5MvWFJPYswAkDMl2H4puF5gL5HdJu9GSwMfDD7pz0WY2Ixk3iKrCck1Npz0X143NugMXZV9eBKwCGeHLh3Y.
-
 # Accept the End User License Agreement
 accept-eula=yes
-
 # How should old configuration files be handled?
 migrate-conf=ignore
-
 # Install required libraries and binaries?
 install-required-libs=yes
 EOF
@@ -308,18 +291,39 @@ chmod +x winetricks
 # Install Kingsoft WPS-Office without internet in jailed snap container 
 # apt install -y snapd
 # snap install wps-office-multilang
-
-# Install Kingsoft WPS-Office with firejail
-wget -c http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/9080/wps-office_11.1.0.9080.XA_amd64.deb
-# aws s3 cp s3://daarwin-prd-eu-central-1-s3-cloudformation-scripts/thinlinc/wps-office_11.1.0.9080.XA_amd64.deb wps-office_11.1.0.9080.XA_amd64.deb --region eu-central-1
-apt-get install -y wps-office_11.1.0.9080.XA_amd64.deb
-apt --fix-broken install
-# install german language
+#############################################
+# Skript zur automatischen Installation von WPS Office mit eigenen Firejail Profilen
+# Install Kingsoft WPS-Office with firejail - chmod a+x wps-de.sh - ./wps-de.sh
+# wget -O - https://raw.githubusercontent.com/andreaspreuss/firejail/master/wps-de.sh | sudo bash 
+#
+# Download newest Kingsoft WPS Office directly from china
+wget -c http://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/9126/wps-office_11.1.0.9126.XA_amd64.deb
+dpkg -i wps-office_11.1.0.9126.XA_amd64.deb
+apt-get install -f
+# install german language for wps
 apt-get install -y p7zip-full
-wget https://github.com/timxx/wps-office-mui/raw/master/mui/de_DE.7z
-7za x de_DE.7z -o/opt/kingsoft/wps-office/office6/mui
+wget https://github.com/andreaspreuss/firejail/raw/master/opt/kingsoft/wps-office/office6/mui/de_DE.7z
+7za x de_DE.7z -y -o/opt/kingsoft/wps-office/office6/mui
+# install german spellcheck for wps
+mkdir -p /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/main.dic -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/main.aff -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE/dict.conf -P /opt/kingsoft/wps-office/office6/dicts/spellcheck/de_DE
+# install firejailing german desktop files 
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-et.desktop -P /opt/kingsoft/wps-office/desktops
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-pdf.desktop -P /opt/kingsoft/wps-office/desktops
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-prometheus.desktop -P /opt/kingsoft/wps-office/desktops
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-wpp.desktop -P /opt/kingsoft/wps-office/desktops
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-wps.desktop -P /opt/kingsoft/wps-office/desktops
+# install mime connections for firejailed wps office
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-et.desktop -P /usr/share/applications
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-pdf.desktop -P /usr/share/applications
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-prometheus.desktop -P /usr/share/applications
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-wpp.desktop -P /usr/share/applications
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-wps.desktop -P /usr/share/applications
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/qmcneu.desktop -P /usr/share/applications
 # install ms fonts
-mkdir /usr/share/fonts/wps-fonts
+# mkdir -p /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WEBDINGS.TTF -P /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WINGDNG2.ttf -P /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/WINGDNG3.ttf -P /usr/share/fonts/wps-fonts
@@ -327,26 +331,42 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/shar
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/wingding.ttf -P /usr/share/fonts/wps-fonts
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/mtextra.ttf -P /usr/share/fonts/wps-fonts
 chmod 644 /usr/share/fonts/wps-fonts/*
-fc-cache -vfs
-# EULA Accepted true
-md ~/.config/Kingsoft
-wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P $HOME/$USERNAME/.config/Kingsoft/
-# install firejail
-apt-get install -y firejail firejail-profiles
+fc-cache -fs
+# install firejail wps profiles working with thinlinc
+apt-get install -y firejail firejail-profiles firetools
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wps.profile -P /etc/firejail/
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wpspdf.profile -P /etc/firejail/
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wpp.profile -P /etc/firejail/
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/et.profile -P /etc/firejail/
+# wine should not start with firejail
+sed -i '470 s/^/# /' /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
+rm -v /etc/firejail/wine*
+# add wps applications in firejail
+echo "et" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wps" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wpspdf" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wpp" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
-# initialize firejail
+# echo "$USER" >> /etc/firejail/firejail.users
+# firejail initialisation desktop Integration
 firecfg
-firecfg --fix
-rm de_DE.7z 
-rm wps-office_11.1.0.9080.XA_amd64.deb
-rm -r $HOME/.kingsoft
+# ln -s /usr/bin/wps /usr/local/bin/wps
+# ln -s /usr/bin/wpp /usr/local/bin/wpp
+# ln -s /usr/bin/wpspdf /usr/local/bin/wpspdf
+# delete unnecassary directories as user
+rm -rf /home/users/$USER/.kingsoft
+rm -rf /home/users/$USER/模板
+# EULA accepted true
+# mkdir -p /home/$USER/.config/Kingsoft
+mkdir -p /home/users/$USER/.config/Kingsoft
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/users/$USER/.config/Kingsoft/
+chmod 644 /home/users/$USER/.config/Kingsoft/*
+# delete unnecessay files & packages
+rm -rf de_DE.7z 
+rm -rf wps-office_11.1.0.9126.XA_amd64.deb
 apt-get remove -y p7zip-full 
-apt-get autoclean
+# cleanup
+apt-get -y autoremove
+apt-get clean all
 
 #Remove unneccesary profiles and run the profilesync util at first boot
 /opt/thinlinc/bin/tl-config /profiles/order="xfce"
