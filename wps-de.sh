@@ -22,7 +22,7 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/king
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-prometheus.desktop -P /opt/kingsoft/wps-office/desktops
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-wpp.desktop -P /opt/kingsoft/wps-office/desktops
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/opt/kingsoft/wps-office/desktops/wps-office-wps.desktop -P /opt/kingsoft/wps-office/desktops
-# install mime mime connections for firejailed wps
+# install mime connections for firejailed wps office
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-et.desktop -P /usr/share/applications
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-pdf.desktop -P /usr/share/applications
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/applications/wps-office-prometheus.desktop -P /usr/share/applications
@@ -39,7 +39,7 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/shar
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/usr/share/fonts/wps-fonts/mtextra.ttf -P /usr/share/fonts/wps-fonts
 chmod 644 /usr/share/fonts/wps-fonts/*
 fc-cache -fs
-# install firejail
+# install firejail wps profiles working with thinlinc
 apt-get install -y firejail firejail-profiles firetools
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wps.profile -P /etc/firejail/
 wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/firejail/wpspdf.profile -P /etc/firejail/
@@ -48,6 +48,7 @@ wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/etc/fire
 # wine should not start with firejail
 sed -i '470 s/^/# /' /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 rm -v /etc/firejail/wine*
+# add wps applications in firejail
 echo "et" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wps" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
 echo "wpspdf" >> /usr/lib/x86_64-linux-gnu/firejail/firecfg.config
