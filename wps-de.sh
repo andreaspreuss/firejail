@@ -60,13 +60,13 @@ firecfg
 # ln -s /usr/bin/wpp /usr/local/bin/wpp
 # ln -s /usr/bin/wpspdf /usr/local/bin/wpspdf
 # delete unnecassary directories as user
-rm -rf /home/users/$USER/.kingsoft
-rm -rf /home/users/$USER/模板
+username="$( echo $1 | awk '{ print $6 }' )"
+rm -rf /home/users/$username/模板
+rm -rf /home/users/$username/.kingsoft
 # EULA accepted true
-# mkdir -p /home/$USER/.config/Kingsoft
-mkdir -p /home/users/$USER/.config/Kingsoft
-wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/users/$USER/.config/Kingsoft/
-chmod 644 /home/users/$USER/.config/Kingsoft/*
+mkdir -p /home/users/$username/.config/Kingsoft
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/users/$username/.config/Kingsoft/
+chmod 644 /home/users/$username/.config/Kingsoft/*
 # delete unnecessay files & packages
 rm -rf de_DE.7z 
 rm -rf wps-office_11.1.0.9126.XA_amd64.deb
