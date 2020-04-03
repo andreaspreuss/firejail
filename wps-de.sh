@@ -65,8 +65,8 @@ rm -rf /home/$USER/模板
 rm -rf /home/$USER/.kingsoft
 # EULA accepted true
 mkdir -p /home/$USER/.config/Kingsoft
-wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/$username/.config/Kingsoft/
-chmod 644 /home/$username/.config/Kingsoft/*
+wget -N https://raw.githubusercontent.com/andreaspreuss/firejail/master/home/username/.config/Kingsoft/Office.conf -P /home/$USER/.config/Kingsoft/
+chmod 644 /home/$USER/.config/Kingsoft/*
 # delete unnecessay files & packages
 rm -rf de_DE.7z 
 rm -rf wps-office_11.1.0.9126.XA_amd64.deb
