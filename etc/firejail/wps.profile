@@ -6,13 +6,13 @@ include wps.local
 ## Persistente globale Definitionen
 include globals.local
 ## Name: Andreas Preuss
-## 13.03.2020
+## 07.04.2020
 ## Version 1.0
 ## ---------------------------------------------------------------
 ## Zugriff deaktivieren
 # Zugangsverbot zu Systemmanagement Werkzeugen (sudo, mount, etc.) 
 # muss bei Verwendung von Thinlinc Server deaktiviert bleiben!
-# include /etc/firejail/disable-common.inc 
+include /etc/firejail/disable-common.inc 
 
 # Zugangsverbot zu Systemprogrammen ${HOME} 
 include /etc/firejail/disable-programs.inc 
@@ -61,7 +61,7 @@ protocol unix
 shell none 
 # Standardmäßig den seccomp-Filter aktivieren und die Syscalls auf eine
 #  schwarze Liste setzen - PID hängt allerdings wenn aktiviert!
-# seccomp
+seccomp
 
 # kein Internet
 net none                            
@@ -91,7 +91,7 @@ nodbus
 
 # Erstellt neues /bin Verzeichnis. 
 # Dadurch werden bestimmte Binärdateien in /usr/bin auf die Whitelist gesetzt und alles andere auf die schwarze Liste gesetzt.
-# private-bin bash,dirname,env,expr,file,grep,rm,sh,wps,wpp,wpspdf
+private-bin bash,dirname,env,expr,file,grep,rm,sh,wps,wpp,wpspdf
 
 # Einen leeren cache in einem temporären Dateisystem erzeugen
 private-cache
@@ -134,7 +134,8 @@ blacklist ~/Schreibtisch
 blacklist ~/Vorlagen
 
 ## Networking 
-# Standardnetzwerkfilter für neu erstellte Netzwerk-Namensräume 
+# Standardnetzwerkfilter für neu erstellte Netzwerk-Namensräume
+# wird nicht benötigt weil ja keine Verbindung 
 # netfilter
 
 # Ausführen und Starten Verboten
