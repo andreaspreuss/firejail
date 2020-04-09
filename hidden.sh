@@ -4,7 +4,7 @@
 # schreibt dieses Script die .hidden Datei in die vordefinierten Verzeichnisse.
 # Script ausführbar machen mit sudo chmod u+x hidden.sh - starten mit sudo ./hidden.sh
 # Andreas Preuß - 08.04.2020
-exceptDirs= proc sys
+# exceptDirs= proc sys
 # Farben definieren
 cred='\e[1;31m'
 cgreen='\033[1;32m'
@@ -39,6 +39,27 @@ dir_array='
 /var/opt
 /var/opt/thinlinc
 /var/opt/thinlinc/sessions
+/var/opt/thinlinc/sessions/charles01
+/var/opt/thinlinc/sessions/charles02
+/var/opt/thinlinc/sessions/charles03
+/var/opt/thinlinc/sessions/charles04
+/var/opt/thinlinc/sessions/charles05
+/var/opt/thinlinc/sessions/charles06
+/var/opt/thinlinc/sessions/charles07
+/var/opt/thinlinc/sessions/charles08
+/var/opt/thinlinc/sessions/charles09
+/var/opt/thinlinc/sessions/charles10
+/var/opt/thinlinc/sessions/charles11
+/var/opt/thinlinc/sessions/charles12
+/var/opt/thinlinc/sessions/charles13
+/var/opt/thinlinc/sessions/charles14
+/var/opt/thinlinc/sessions/charles15
+/var/opt/thinlinc/sessions/charles16
+/var/opt/thinlinc/sessions/charles17
+/var/opt/thinlinc/sessions/charles18
+/var/opt/thinlinc/sessions/charles19
+/var/opt/thinlinc/sessions/charles20
+/sys
 /srv
 /srv/opt
 /srv/opt/thinlinc
