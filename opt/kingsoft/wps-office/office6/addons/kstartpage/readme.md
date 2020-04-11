@@ -1,1 +1,1 @@
-WPS Browser Plugin für Kiosk Funktion deaktiviert
+WPS Browser Plugin für Kiosk Funktion gepatched und deaktiviert
