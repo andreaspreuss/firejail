@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<officenav tc="KEntry" component="kstartpage" version="1.0">
+	<EntryGroup id="CommonEntrys" fixed="true">
+	<!--	<KTemplatePageEntry id="newfromtemplate" text="@New Template Document" icon="nav_opendocerpage" tips="" pageType="pageNewDocs" fixedPos="1" permanent="1" component="1" infoName="" filter="lang=zh_CN,en_US;"/>
+		<KPageEntry id="newdocument" text="@New Document" icon="nav_newdocument" tips="" pageType="pageNewDocs" fixedPos="1" permanent="1" component="1" infoName=""/>
+		<KCmdOpenFileEntry id="openfiledialog" text="@Open" icon="nav_openfiledialog" tips="" fixedPos="1" permanent="1" component="1" infoName=""/>
+		<separator id="separator"/> //-->
+	</EntryGroup>
+	<!--<KPageEntry id="kofficenav" text="@Web Navgation" icon="nav_kofficenav" tips="" pageType="pageOfficeNav" fixedPos="1" infoName=""/>-->
+	<!--
+	<EntryGroup id="AppcenterEntrys" fixed="false" minimum="5" permanent="1" stretch="1">
+		<KCmdAppCenterEntry id="appcenter" text="@App Center" tips="" fixedPos="1" permanent="1" infoName="" groupTitle="true" filter="lang=de_DE;"/>
+		<KProxyEntry id="docershop" text="@Docer Shop" icon="nav_docershop" tips="" appID="docershop" infoName=""/>
+		<KProxyEntry id="kpdf2wordv2" text="@PDF to Word" icon="nav_kpdf2wordv2" tips="" appID="kpdf2wordv2" infoName=""/>
+		<KProxyEntry id="kcalculatortool" text="@Calculator Tool" icon="nav_calculatortool" tips="" appID="kcalculatortool" infoName=""/>
+		<KProxyEntry id="kpromeclouddocs_team" text="@Team" icon="nav_kpromeclouddocs_team" tips="" appID="kpromeclouddocs_team" infoName="" filter="category!=professional"/> //-->
+	<!--<KProxyEntry id="kdatarecover_prome" text="@Data Recover" icon="nav_datarecover" tips="" appID="kdatarecover_prome" infoName=""/> //-->
+	<!--	<KProxyEntry id="kdocumentfix" text="@Document Fix" icon="nav_kdocumentfix" tips="" appID="kdocumentfix" infoName=""/>
+		<KProxyEntry id="kwpsnote" text="@WPS Note" icon="nav_kwpsnote" tips="" appID="kwpsnote"  infoName=""/>
+		<KProxyEntry id="kpromeshowtime" text="@WPS H5" icon="nav_kpromeshowtime" tips="" appID="kpromeshowtime"  infoName="" filter="category=professional"/>
+		<KProxyEntry id="kpromeeducourse" text="@WPS Edu Course" icon="nav_kpromeeducourse" tips="" appID="kpromeeducourse"  infoName=""/>
+		<KProxyEntry id="kpromewpsmember" text="@WPS Member" icon="nav_kpromewpsmember" tips="" appID="kpromewpsmember" infoName="kpromewpsmember"/>
+		<KProxyEntry id="kpromeprocesson_flow" text="@ProcessOn Flow" icon="nav_processon_flow" tips="" appID="kpromeprocesson_flow"  infoName=""/>
+		<KProxyEntry id="kpromeprocesson_mind" text="@ProcessOn Mind" icon="nav_kprocesson" tips="" appID="kpromeprocesson_mind"  infoName=""/>
+	<!--<KProxyEntry id="wpsminisite" text="@WPS News" icon="nav_minisite" tips="" appID="wpsminisite" infoName=""/> 
+		<KProxyEntry id="kpromeclouddocs" text="@Cloud Document" icon="nav_kpromeclouddocs" tips="" pageType="pageCloudDocs" appID="kpromeclouddocs" infoName=""/>
+		<KProxyEntry id="kpromeksrong" text="@Kingsoft Loan" icon="nav_kpromeksrong" tips="" pageType="pageKsrong" appID="kpromeksrong" infoName=""/> //--> 
+	</EntryGroup>
+
+	<EntryGroup id="RecommendEntrys" fixed="true">
+	<!--	<KTitleEntry id="recommend" text="@Recommend App" tips="" permanent="true" groupTitle="true"/>
+		<KProxyEntry id="shareprint" text="@Share Print" icon="nav_shareprint" tips="" appID="shareprint" infoName=""/>
+		<KProxyEntry id="kbackupcenter" text="@Backup Center" icon="nav_backupcenter" tips="" appID="kbackupcenter" infoName=""/>
+		<KProxyEntry id="kdatarecover_prome" text="@Data Recover" icon="nav_datarecover" tips="" appID="kdatarecover_prome" infoName=""/>
+		<KProxyEntry id="kocrtool" text="@OCR Tool" icon="nav_kocrtool" tips="" appID="kocrtool" infoName=""/>
+		<KProxyEntry id="kscreensaver" text="@WPS Screensaver" icon="nav_kscreensaver" tips="" appID="kscreensaver" infoName=""/> -->
+	</EntryGroup>
+</officenav>
