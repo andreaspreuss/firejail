@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component tc="KComponentItem" component="kstartpage">
+	<KWeatherComponent id="weather" name="@weather" title="@Weather Title" text="@Weather Text" icon="pic_weather" tips="" enable="true"/>
+<!--	<KDocerComponent id="docer" name="@docer" title="@Docer Title" text="@Docer Text" icon="pic_docer" tips="" enable="true" appName="19_docer_widget" productName="@docer_component"/> //-->
+</component>
