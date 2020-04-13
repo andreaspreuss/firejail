@@ -1,6 +1,5 @@
 ## WPS Kingsoft office firejailed modification.
 
-
 wps Office clean client in german 
 
 firejail --debug --x11 wps
@@ -14,3 +13,8 @@ Install Kingsoft WPS Office in german :
 Install Softmaker Freeoffice german :
 
 `wget -O - https://raw.githubusercontent.com/andreaspreuss/firejail/master/fo-de.sh | sudo bash`
+
+
+This is a project to modify wps-office for Kiosk-Mode 
+
+here is a full repo of wps office available --> https://repo.fury.io/beebox/
