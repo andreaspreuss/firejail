@@ -17,4 +17,4 @@ Install Softmaker Freeoffice german :
 
 This is a project to modify wps-office for Kiosk-Mode 
 
-here is a full repo of wps office available --> https://repo.fury.io/beebox/
+here is a full repo of wps office available --> https://gemfury.com/beebox/deb:wps-office
