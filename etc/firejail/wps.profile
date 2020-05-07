@@ -91,7 +91,7 @@ nodbus
 
 # Erstellt neues /bin Verzeichnis. 
 # Dadurch werden bestimmte Binärdateien in /usr/bin auf die Whitelist gesetzt und alles andere auf die schwarze Liste gesetzt.
-private-bin bash,dirname,env,expr,file,grep,rm,sh,wps,wpp,wpspdf
+private-bin bash,dirname,env,expr,file,grep,rm,sh,et,wps,wpp,wpspdf
 
 # Einen leeren cache in einem temporären Dateisystem erzeugen
 private-cache
