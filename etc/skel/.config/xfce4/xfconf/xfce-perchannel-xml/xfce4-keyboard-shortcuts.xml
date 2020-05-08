@@ -27,14 +27,14 @@
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Primary&gt;Escape" type="string" value="xfdesktop --menu"/>
       <property name="override" type="bool" value="true"/>
-      <property name="&lt;Primary&gt;h" type="string" value="/opt/nob.sh"/>
-      <property name="&lt;Alt&gt;F3" type="string" value="/opt/nob.sh">
+      <property name="&lt;Primary&gt;h" type="string" value="sleep 0.5"/>
+      <property name="&lt;Alt&gt;F3" type="string" value="sleep 0.5">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="&lt;Alt&gt;F2" type="string" value="/opt/nob.sh">
+      <property name="&lt;Alt&gt;F2" type="string" value="sleep 0.5">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="&lt;Alt&gt;F1" type="string" value="/opt/nob.sh"/>
+      <property name="&lt;Alt&gt;F1" type="string" value="sleep 0.5"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
