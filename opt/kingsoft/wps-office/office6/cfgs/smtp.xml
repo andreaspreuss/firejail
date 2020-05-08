@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SmtpServer>
     <server Name="qq.com" UseAuthCode="true" SupportCommon="true" SupportSSL="true" SupportSTARTTLS="true" SmtpServer="smtp.qq.com" CommonPort="25" PortSSL="465">
-        <AuthCodeHelpURL><![CDATA[https://service.mail.qq.com/cgi-bin/help?subtype=1&&no=1001256&&id=28]]></AuthCodeHelpURL>
+        <AuthCodeHelpURL><![CDATA[https://outlook.office365.com]]></AuthCodeHelpURL>
     </server>
     <server Name="163.com" UseAuthCode="true" SupportCommon="true" SupportSSL="true" SupportSTARTTLS="true" SmtpServer="smtp.163.com" CommonPort="25" PortSSL="465" >
-        <AuthCodeHelpURL><![CDATA[https://help.mail.163.com/faqDetail.do?code=d7a5dc8471cd0c0e8b4b8f4f8e49998b374173cfe9171305fa1ce630d7f67ac2cda80145a1742516]]></AuthCodeHelpURL>
+        <AuthCodeHelpURL><![CDATA[https://outlook.office365.com]]></AuthCodeHelpURL>
     </server>
     <server Name="126.com" UseAuthCode="true" SupportCommon="true" SupportSSL="true" SupportSTARTTLS="true" SmtpServer="smtp.126.com" CommonPort="25" PortSSL="465" >
-        <AuthCodeHelpURL><![CDATA[https://help.mail.163.com/faqDetail.do?code=d7a5dc8471cd0c0e8b4b8f4f8e49998b374173cfe9171305fa1ce630d7f67ac2cda80145a1742516]]></AuthCodeHelpURL>
+        <AuthCodeHelpURL><![CDATA[https://outlook.office365.com]]></AuthCodeHelpURL>
     </server>
     <server Name="hotmail.com" UseAuthCode="false" SupportCommon="false" SupportSSL="true" SupportSTARTTLS="true" SmtpServer="smtp.office365.com" CommonPort="25" PortSSL="465">
         <AuthCodeHelpURL><![CDATA[]]></AuthCodeHelpURL>
@@ -15,8 +15,7 @@
     <server Name="outlook.com" UseAuthCode="false" SupportCommon="false" SupportSSL="true" SupportSTARTTLS="true" SmtpServer="smtp.office365.com" CommonPort="25" PortSSL="465">
         <AuthCodeHelpURL><![CDATA[]]></AuthCodeHelpURL>
     </server>
-    <server Name="wps.cn" UseAuthCode="false" SupportCommon="true" SupportSSL="false" SupportSTARTTLS="false" SmtpServer="smtp.wps.cn" CommonPort="25" PortSSL="465">
+    <server Name="gmx.de" UseAuthCode="false" SupportCommon="true" SupportSSL="false" SupportSTARTTLS="false" SmtpServer="smtp.gmx.de" CommonPort="25" PortSSL="465">
         <AuthCodeHelpURL><![CDATA[]]></AuthCodeHelpURL>
     </server>
 </SmtpServer>
-
