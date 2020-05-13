@@ -23,13 +23,14 @@ include /etc/firejail/disable-passwdmgr.inc
 # Zugangsverbot zu Entwickler Werkzeugen
 include /etc/firejail/disable-devel.inc
 
-# Zugangs Verbot zu Interpretern
+# Zugangsverbot zu Interpretern
 include /etc/firejail/disable-interpreters.inc
 
 # Anwendung unabhängig vom Terminal gestellt
 include /etc/firejail/disable-xdg.inc
 
 # include whitelist-var-common.inc
+# nix whitelist nur blacklist
 
 # Erlaubte Pfade von WPS Office
 noblacklist /usr/local/sbin
@@ -45,7 +46,7 @@ noblacklist ${DOCUMENTS}
 noblacklist ${HOME}/Vorlage
 noblacklist ${HOME}/.local/share/wineprefixes/qmc/drive_c/TMP/
 
-#WPS - SCHREIBSCHUTZ
+# WPS - SCHREIBSCHUTZ
 noblacklist ${HOME}
 
 ## Sicherheitsfilter 
