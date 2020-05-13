@@ -6,7 +6,7 @@ include wps.local
 ## Persistente globale Definitionen
 include globals.local
 ## Name: Andreas Preuss
-## 07.04.2020
+## 13.05.2020
 ## Version 1.0
 ## ---------------------------------------------------------------
 ## Zugriff deaktivieren
@@ -20,7 +20,7 @@ include /etc/firejail/disable-programs.inc
 # Zugangsverbot zu Passwort Manager Dateien 
 include /etc/firejail/disable-passwdmgr.inc 
 
-# Zugangs Verbot zu Entwickler Werkzeugen
+# Zugangsverbot zu Entwickler Werkzeugen
 include /etc/firejail/disable-devel.inc
 
 # Zugangs Verbot zu Interpretern
