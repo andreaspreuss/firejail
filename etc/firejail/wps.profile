@@ -46,9 +46,6 @@ noblacklist ${DOCUMENTS}
 noblacklist ${HOME}/Vorlage
 noblacklist ${HOME}/.local/share/wineprefixes/qmc/drive_c/TMP/
 
-# WPS - SCHREIBSCHUTZ
-noblacklist ${HOME}
-
 ## Sicherheitsfilter 
 # Schwarze Liste aller Linux-Funktionen
 apparmor
